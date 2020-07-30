@@ -2,6 +2,9 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import { makeStyles } from '@material-ui/core/styles';
+
+import logo from '../../assets/logotipo-alpha.png';
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -16,12 +19,28 @@ function ElevationScroll(props) {
   });
 }
 
-export default function Header() {
+const useStyles = makeStyles((theme) => ({
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
+  },
+  logo: {
+    height: "3em"
+  }
+}));
+
+export default function Header(props) {
+  const classes = useStyles();
+
   return (
-    <ElevationScroll>
-      <AppBar>
-        <Toolbar>Adcond Adm. de Condomínios</Toolbar>
-      </AppBar>
-    </ElevationScroll>
+    <>
+      <ElevationScroll>
+        <AppBar>
+          <Toolbar>
+            <img src={logo} alt="Logo da Adcond Adm. de Condomínios" className={classes.logo} />
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <div className={classes.toolbarMargin} />
+    </>
   );
 }
