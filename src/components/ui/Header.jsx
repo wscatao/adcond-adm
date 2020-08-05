@@ -2,6 +2,8 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 
 import logo from '../../assets/logotipo-alpha.png';
@@ -25,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     height: "3em"
+  },
+  tabContainer: {
+    marginLeft: "auto"
+  },
+  tab: {
+    ...theme.typography.tab,
+    minWidth: 10,
+    marginLeft: "25px"
   }
 }));
 
@@ -37,6 +47,13 @@ export default function Header(props) {
         <AppBar>
           <Toolbar>
             <img src={logo} alt="Logo da Adcond Adm. de Condomínios" className={classes.logo} />
+            <Tabs className={classes.tabContainer}>
+              <Tab className={classes.tab} label="Sobre" />
+              <Tab className={classes.tab} label="Contato" />
+              <Tab className={classes.tab} label="Localização" />
+              <Tab className={classes.tab} label="Serviços" />
+              <Tab className={classes.tab} label="Cotação Online" />
+            </Tabs>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

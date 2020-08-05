@@ -21,5 +21,12 @@ export default createMuiTheme({
     background: {
       default: `${background}`
     }
+  },
+  typography: {
+    tab: {
+      textTransform: "none",
+      fontWeight: 700,
+      fontSize: "1rem",
+    }
   }
 });
