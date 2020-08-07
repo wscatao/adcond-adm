@@ -66,7 +66,7 @@ export default function Header(props) {
     if (pathname === '/local' && value !== 2) return setValue(2)
     if (pathname === '/services' && value !== 3) return setValue(3)
     return undefined
-  }, [value]);
+  }, [value, pathname]);
 
   return (
     <>
