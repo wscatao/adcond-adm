@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Header(props) {
+export default function Header() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const { pathname } = useLocation();
