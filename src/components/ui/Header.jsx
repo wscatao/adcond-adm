@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logotipo-alpha.png';
 
@@ -46,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  };
 
   return (
     <>
@@ -53,13 +59,13 @@ export default function Header(props) {
         <AppBar>
           <Toolbar>
             <img src={logo} alt="Logo da Adcond Adm. de Condomínios" className={classes.logo} />
-            <Tabs className={classes.tabContainer}>
-              <Tab className={classes.tab} label="Sobre" />
-              <Tab className={classes.tab} label="Contato" />
-              <Tab className={classes.tab} label="Localização" />
+            <Tabs value={value} onChange={handleChange} className={classes.tabContainer}>
+              <Tab className={classes.tab} component={Link} to="/about" label="Sobre" />
+              <Tab className={classes.tab} component={Link} to="/contact" label="Contato" />
+              <Tab className={classes.tab} component={Link} to="/contact" label="Localização" />
               <Tab className={classes.tab} label="Serviços" />
             </Tabs>
-            <Button variant="outlined" color="secondary" className={classes.button}>Cotação Online</Button>
+            <Button component={Link} to="/price" variant="outlined" color="secondary" className={classes.button}>Cotação Online</Button>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
