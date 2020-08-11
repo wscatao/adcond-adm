@@ -188,7 +188,7 @@ export default function Header() {
                 classes={{ root: classes.menuItem }}
               >
                 <AccountBoxRoundedIcon classes={{ root: classes.icons }} />
-                Acesso do condômino
+                Acesso do Condômino
               </MenuItem>
             </Menu>
           </Toolbar>
