@@ -9,6 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link, useLocation } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
+import ApartmentRoundedIcon from '@material-ui/icons/ApartmentRounded';
+import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
 
 import logo from '../../assets/logotipo-alpha.png';
 
@@ -51,6 +54,17 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '50px',
     marginRight: '25px',
   },
+  menu: {
+    backgroundColor: theme.palette.common.texto,
+    color: 'white',
+    borderRadius: 0,
+  },
+  menuItem: {
+    ...theme.typography.tab,
+  },
+  icons: {
+    marginRight: '10px'
+  }
 }));
 
 export default function Header() {
@@ -139,10 +153,43 @@ export default function Header() {
             >
               Cotação Online
             </Button>
-            <Menu id='simple-menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-              <MenuItem component={Link} to='/residencial' onClick={handleClose}>Condomínios Residenciais</MenuItem>
-              <MenuItem component={Link} to='/commercial' onClick={handleClose}>Condomínios Comerciais</MenuItem>
-              <MenuItem component={Link} to='/condominium' onClick={handleClose}>Acesso do condômino</MenuItem>
+            <Menu
+              id='simple-menu'
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              getContentAnchorEl={null}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+              classes={{ paper: classes.menu }}
+            >
+              <MenuItem
+                component={Link}
+                to='/residencial'
+                onClick={handleClose}
+                classes={{ root: classes.menuItem }}
+              >
+                <HomeWorkRoundedIcon classes={{ root: classes.icons }} />
+                Condomínios Residenciais
+              </MenuItem>
+              <MenuItem
+                component={Link}
+                to='/commercial'
+                onClick={handleClose}
+                classes={{ root: classes.menuItem }}
+              >
+                <ApartmentRoundedIcon classes={{ root: classes.icons }} />
+                Condomínios Comerciais
+              </MenuItem>
+              <MenuItem
+                component={Link}
+                to='/condominium'
+                onClick={handleClose}
+                classes={{ root: classes.menuItem }}
+              >
+                <AccountBoxRoundedIcon classes={{ root: classes.icons }} />
+                Acesso do condômino
+              </MenuItem>
             </Menu>
           </Toolbar>
         </AppBar>
