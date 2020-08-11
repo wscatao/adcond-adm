@@ -140,9 +140,9 @@ export default function Header() {
               Cotação Online
             </Button>
             <Menu id='simple-menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-              <MenuItem onClick={handleClose}>Condomínios Residenciais</MenuItem>
-              <MenuItem onClick={handleClose}>Condomínios Comerciais</MenuItem>
-              <MenuItem onClick={handleClose}>Acesso do condômino</MenuItem>
+              <MenuItem component={Link} to='/residencial' onClick={handleClose}>Condomínios Residenciais</MenuItem>
+              <MenuItem component={Link} to='/commercial' onClick={handleClose}>Condomínios Comerciais</MenuItem>
+              <MenuItem component={Link} to='/condominium' onClick={handleClose}>Acesso do condômino</MenuItem>
             </Menu>
           </Toolbar>
         </AppBar>
