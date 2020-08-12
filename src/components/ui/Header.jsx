@@ -73,6 +73,12 @@ export default function Header() {
   const { pathname } = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const options = [
+    {name: 'Condomínios Residenciais', link: '/residencial'},
+    {name: 'Condomínios Comerciais', link: '/commercial'},
+    {name: 'Acesso do Condômino', link: '/condominium'},
+  ]
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -85,13 +91,40 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const handleIcons = (i) => {
+    if (i === 0) return <HomeWorkRoundedIcon classes={{ root: classes.icons }} />
+    if (i === 1) return <ApartmentRoundedIcon classes={{ root: classes.icons }} />
+    if (i === 2) return <AccountBoxRoundedIcon classes={{ root: classes.icons }} />
+    return undefined
+  }
+
   useEffect(() => {
-    if (pathname === '/' && value !== 0) return setValue(0);
-    if (pathname === '/about' && value !== 1) return setValue(1);
-    if (pathname === '/local' && value !== 2) return setValue(2);
-    if (pathname === '/services' && value !== 3) return setValue(3);
-    return undefined;
-  }, [value, pathname]);
+    switch (pathname) {
+      case '/':
+        if ( value !== 0 ) setValue(0); 
+        break;
+      case '/about':
+        if ( value !== 1 ) setValue(1);
+        break;
+      case '/local':
+        if ( value !== 2 ) setValue(2);
+        break;
+      case '/services':
+        if ( value !== 3 ) setValue(3);
+        break;
+      case '/residencial':
+        if ( value !== 3 ) setValue(3);
+        break;
+      case '/commercial':
+        if ( value !== 3 ) setValue(3);
+        break;
+      case '/condominium':
+        if ( value !== 3 ) setValue(3);
+        break;
+      default:
+        break;
+    }
+  }, [pathname]);
 
   return (
     <>
@@ -163,33 +196,18 @@ export default function Header() {
               transformOrigin={{ vertical: 'top', horizontal: 'left' }}
               classes={{ paper: classes.menu }}
             >
-              <MenuItem
-                component={Link}
-                to='/residencial'
-                onClick={handleClose}
-                classes={{ root: classes.menuItem }}
-              >
-                <HomeWorkRoundedIcon classes={{ root: classes.icons }} />
-                Condomínios Residenciais
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                to='/commercial'
-                onClick={handleClose}
-                classes={{ root: classes.menuItem }}
-              >
-                <ApartmentRoundedIcon classes={{ root: classes.icons }} />
-                Condomínios Comerciais
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                to='/condominium'
-                onClick={handleClose}
-                classes={{ root: classes.menuItem }}
-              >
-                <AccountBoxRoundedIcon classes={{ root: classes.icons }} />
-                Acesso do Condômino
-              </MenuItem>
+              {options.map((option, i) => (
+                <MenuItem
+                  key={option}
+                  component={Link}
+                  to={option.link}
+                  onClick={handleClose}
+                  classes={{ root: classes.menuItem }}
+                >
+                  {handleIcons(i)}
+                  {option.name}
+                </MenuItem>
+              ))}
             </Menu>
           </Toolbar>
         </AppBar>
