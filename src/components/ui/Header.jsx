@@ -11,10 +11,23 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+
 
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
 import ApartmentRoundedIcon from '@material-ui/icons/ApartmentRounded';
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import WorkRoundedIcon from '@material-ui/icons/WorkRounded';
+import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
+import MyLocationRoundedIcon from '@material-ui/icons/MyLocationRounded';
+import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../../assets/logotipo-alpha.png';
 
 function ElevationScroll(props) {
@@ -37,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: '4em',
     [theme.breakpoints.down('md')]: {
-      height: '3em'
+      height: '3em',
     },
     [theme.breakpoints.down('xs')]: {
-      height: '2em'
+      height: '2em',
     },
   },
   logoContainer: {
@@ -73,15 +86,25 @@ const useStyles = makeStyles((theme) => ({
   icons: {
     marginRight: '10px',
   },
+  drawerIconContainer: {
+    marginLeft: 'auto'
+  },
+  drawerIcon: {
+    height: '30px',
+    width: '30px',
+  }
 }));
 
 export default function Header() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [value, setValue] = useState(0);
   const { pathname } = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('md'));
 
   const options = [
     { name: 'Condomínios Residenciais', link: '/residencial' },
@@ -204,6 +227,73 @@ export default function Header() {
     </>
   );
 
+  const drawer = (
+    <>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)}
+        anchor='right'
+      >
+        <List>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/' >
+            <ListItemIcon>
+              <HomeRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Página Inicial</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/about' >
+            <ListItemIcon>
+              <WorkRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Sobre</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/local' >
+            <ListItemIcon>
+              <PhoneRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Contato</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/local' >
+            <ListItemIcon>
+              <MyLocationRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Localização</ListItemText>
+          </ListItem>
+          <ListSubheader>
+            Serviços
+          </ListSubheader>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/residencial' >
+            <ListItemIcon>
+              <HomeWorkRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Condomínios Residenciais</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/commercial' >
+            <ListItemIcon>
+              <ApartmentRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Condomínios Comerciais</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/condominium' >
+            <ListItemIcon>
+              <AccountBoxRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>Acesso do Condômino</ListItemText>
+          </ListItem>
+        </List>
+      </SwipeableDrawer>
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setOpenDrawer(!openDrawer)}
+      >
+        <MenuIcon className={classes.drawerIcon} />
+      </IconButton>
+    </>
+  );
+
   return (
     <>
       <ElevationScroll>
@@ -222,7 +312,7 @@ export default function Header() {
                 className={classes.logo}
               />
             </Button>
-            { matches ? null : tabs }
+            {matches ? drawer : tabs}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
