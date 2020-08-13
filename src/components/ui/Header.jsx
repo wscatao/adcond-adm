@@ -92,6 +92,19 @@ const useStyles = makeStyles((theme) => ({
   drawerIcon: {
     height: '30px',
     width: '30px',
+  },
+  drawer: {
+    backgroundColor: theme.palette.common.texto
+  },
+  drawerListText: {
+    ...theme.typography.tab,
+    color: 'white'
+  },
+  drawerSubheader: {
+    color: 'white'
+  },
+  listIcon: {
+    color: 'white'
   }
 }));
 
@@ -236,52 +249,53 @@ export default function Header() {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
         anchor='right'
+        classes={{ paper: classes.drawer }}
       >
         <List>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/' >
             <ListItemIcon>
-              <HomeRoundedIcon />
+              <HomeRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Página Inicial</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Página Inicial</ListItemText>
           </ListItem>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/about' >
             <ListItemIcon>
-              <WorkRoundedIcon />
+              <WorkRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Sobre</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Sobre</ListItemText>
           </ListItem>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/local' >
             <ListItemIcon>
-              <PhoneRoundedIcon />
+              <PhoneRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Contato</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Contato</ListItemText>
           </ListItem>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/local' >
             <ListItemIcon>
-              <MyLocationRoundedIcon />
+              <MyLocationRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Localização</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Localização</ListItemText>
           </ListItem>
-          <ListSubheader>
+          <ListSubheader className={classes.drawerSubheader} >
             Serviços
           </ListSubheader>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/residencial' >
             <ListItemIcon>
-              <HomeWorkRoundedIcon />
+              <HomeWorkRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Condomínios Residenciais</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Condomínios Residenciais</ListItemText>
           </ListItem>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/commercial' >
             <ListItemIcon>
-              <ApartmentRoundedIcon />
+              <ApartmentRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Condomínios Comerciais</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Condomínios Comerciais</ListItemText>
           </ListItem>
           <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/condominium' >
             <ListItemIcon>
-              <AccountBoxRoundedIcon />
+              <AccountBoxRoundedIcon className={classes.listIcon} />
             </ListItemIcon>
-            <ListItemText>Acesso do Condômino</ListItemText>
+            <ListItemText disableTypography className={classes.drawerListText} >Acesso do Condômino</ListItemText>
           </ListItem>
         </List>
       </SwipeableDrawer>
