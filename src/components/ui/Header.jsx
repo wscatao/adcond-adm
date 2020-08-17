@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -19,14 +19,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
 import ApartmentRoundedIcon from '@material-ui/icons/ApartmentRounded';
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import WorkRoundedIcon from '@material-ui/icons/WorkRounded';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
-import MyLocationRoundedIcon from '@material-ui/icons/MyLocationRounded';
 import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../../assets/logotipo-alpha.png';
 
@@ -87,25 +85,25 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '10px',
   },
   drawerIconContainer: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
   },
   drawerIcon: {
     height: '30px',
     width: '30px',
   },
   drawer: {
-    backgroundColor: theme.palette.common.texto
+    backgroundColor: theme.palette.common.texto,
   },
   drawerListText: {
     ...theme.typography.tab,
-    color: 'white'
+    color: 'white',
   },
   drawerSubheader: {
-    color: 'white'
+    color: 'white',
   },
   listIcon: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 }));
 
 export default function Header() {
@@ -113,16 +111,29 @@ export default function Header() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-
   const [openDrawer, setOpenDrawer] = useState(false);
   const [value, setValue] = useState(0);
-  const { pathname } = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const options = [
-    { name: 'Condomínios Residenciais', link: '/residencial' },
-    { name: 'Condomínios Comerciais', link: '/commercial' },
-    { name: 'Acesso do Condômino', link: '/condominium' },
+    {
+      name: 'Condomínios Residenciais',
+      link: '/residencial',
+      activeIndex: 3,
+      icon: <HomeWorkRoundedIcon className={classes.listIcon} />,
+    },
+    {
+      name: 'Condomínios Comerciais',
+      link: '/commercial',
+      activeIndex: 3,
+      icon: <ApartmentRoundedIcon className={classes.listIcon} />,
+    },
+    {
+      name: 'Acesso do Condômino',
+      link: '/condominium',
+      activeIndex: 3,
+      icon: <AccountBoxRoundedIcon className={classes.listIcon} />,
+    },
   ];
 
   const handleChange = (event, newValue) => {
@@ -147,33 +158,46 @@ export default function Header() {
     return undefined;
   };
 
+  const menuOptions = [
+    {
+      name: 'Página Inicial',
+      link: '/',
+      activeIndex: 0,
+      icon: <HomeRoundedIcon className={classes.listIcon} />,
+    },
+    {
+      name: 'Sobre',
+      link: '/about',
+      activeIndex: 1,
+      icon: <WorkRoundedIcon className={classes.listIcon} />,
+    },
+    {
+      name: 'Localização',
+      link: '/local',
+      activeIndex: 2,
+      icon: <PhoneRoundedIcon className={classes.listIcon} />,
+    },
+    {
+      name: 'Serviços',
+      link: '/services',
+      activeIndex: 3,
+      'aria-controls': 'simple-menu',
+      'aria-haspopup': true,
+      onClick: handleClick,
+    },
+  ];
+
   useEffect(() => {
-    switch (pathname) {
-      case '/':
-        if (value !== 0) setValue(0);
-        break;
-      case '/about':
-        if (value !== 1) setValue(1);
-        break;
-      case '/local':
-        if (value !== 2) setValue(2);
-        break;
-      case '/services':
-        if (value !== 3) setValue(3);
-        break;
-      case '/residencial':
-        if (value !== 3) setValue(3);
-        break;
-      case '/commercial':
-        if (value !== 3) setValue(3);
-        break;
-      case '/condominium':
-        if (value !== 3) setValue(3);
-        break;
-      default:
-        break;
-    }
-  }, [pathname, value]);
+    [...menuOptions, ...options].forEach((option) => {
+      switch (window.location.pathname) {
+        case `${option.link}`:
+          if (value !== option.activeIndex) setValue(option.activeIndex);
+          break;
+        default:
+          break;
+      }
+    });
+  }, [value, menuOptions, options]);
 
   const tabs = (
     <>
@@ -182,28 +206,18 @@ export default function Header() {
         onChange={handleChange}
         className={classes.tabContainer}
       >
-        <Tab className={classes.tab} component={Link} to='/' label='Home' />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to='/about'
-          label='Sobre'
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to='/local'
-          label='Localização'
-        />
-        <Tab
-          aria-controls='simple-menu'
-          aria-haspopup='true'
-          onClick={handleClick}
-          className={classes.tab}
-          component={Link}
-          to='/services'
-          label='Serviços'
-        />
+        {menuOptions.map((tab) => (
+          <Tab
+            key={tab.name}
+            className={classes.tab}
+            component={Link}
+            to={tab.link}
+            label={tab.name}
+            aria-controls={tab['aria-controls']}
+            aria-haspopup={tab['aria-haspopup']}
+            onClick={tab.onClick}
+          />
+        ))}
       </Tabs>
       <Button
         component={Link}
@@ -252,51 +266,33 @@ export default function Header() {
         classes={{ paper: classes.drawer }}
       >
         <List>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/' >
-            <ListItemIcon>
-              <HomeRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Página Inicial</ListItemText>
-          </ListItem>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/about' >
-            <ListItemIcon>
-              <WorkRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Sobre</ListItemText>
-          </ListItem>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/local' >
-            <ListItemIcon>
-              <PhoneRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Contato</ListItemText>
-          </ListItem>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/local' >
-            <ListItemIcon>
-              <MyLocationRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Localização</ListItemText>
-          </ListItem>
-          <ListSubheader className={classes.drawerSubheader} >
-            Serviços
-          </ListSubheader>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/residencial' >
-            <ListItemIcon>
-              <HomeWorkRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Condomínios Residenciais</ListItemText>
-          </ListItem>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/commercial' >
-            <ListItemIcon>
-              <ApartmentRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Condomínios Comerciais</ListItemText>
-          </ListItem>
-          <ListItem button onClick={() => setOpenDrawer(false)} component={Link} to='/condominium' >
-            <ListItemIcon>
-              <AccountBoxRoundedIcon className={classes.listIcon} />
-            </ListItemIcon>
-            <ListItemText disableTypography className={classes.drawerListText} >Acesso do Condômino</ListItemText>
-          </ListItem>
+          {[...menuOptions, ...options].map((opt) => {
+            if (opt.link === '/services') {
+              return (
+                <ListSubheader key={opt.link} className={classes.drawerSubheader}>
+                  Serviços
+                </ListSubheader>
+              );
+            }
+
+            return (
+              <ListItem
+                key={opt.name}
+                button
+                onClick={() => setOpenDrawer(false)}
+                component={Link}
+                to={opt.link}
+              >
+                <ListItemIcon>{opt.icon}</ListItemIcon>
+                <ListItemText
+                  disableTypography
+                  className={classes.drawerListText}
+                >
+                  {opt.name}
+                </ListItemText>
+              </ListItem>
+            );
+          })}
         </List>
       </SwipeableDrawer>
       <IconButton
