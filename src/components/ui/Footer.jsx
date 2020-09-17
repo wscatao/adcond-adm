@@ -12,13 +12,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: 'white',
     height: '2em',
-    padding: '0.2em'
+    padding: '0.2em',
   },
   links: {
     color: theme.palette.common.texto,
     fontSize: '1em',
     fontWeight: 'bold',
-  }
+  },
 }));
 
 export default function Footer() {
@@ -57,7 +57,7 @@ export default function Footer() {
           </Grid>
         </Grid>
       </Grid>
-      <Container disableGutters maxWidth='false' className={classes.footerF}>
+      <Container disableGutters maxWidth="false" className={classes.footerF}>
         ADCOND Administração de Condomínios
       </Container>
     </footer>
