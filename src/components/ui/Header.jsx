@@ -221,15 +221,15 @@ export default function Header() {
       </Tabs>
       <Button
         component={Link}
-        to='/price'
-        variant='outlined'
-        color='secondary'
+        to="/price"
+        variant="outlined"
+        color="secondary"
         className={classes.button}
       >
         Cotação Online
       </Button>
       <Menu
-        id='simple-menu'
+        id="simple-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
@@ -262,14 +262,17 @@ export default function Header() {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
-        anchor='right'
+        anchor="right"
         classes={{ paper: classes.drawer }}
       >
         <List>
           {[...menuOptions, ...options].map((opt) => {
             if (opt.link === '/services') {
               return (
-                <ListSubheader key={opt.link} className={classes.drawerSubheader}>
+                <ListSubheader
+                  key={opt.link}
+                  className={classes.drawerSubheader}
+                >
                   Serviços
                 </ListSubheader>
               );
@@ -311,14 +314,14 @@ export default function Header() {
           <Toolbar>
             <Button
               component={Link}
-              to='/'
+              to="/"
               onClick={() => setValue(0)}
               className={classes.logoContainer}
               disableRipple
             >
               <img
                 src={logo}
-                alt='Logo da Adcond Adm. de Condomínios'
+                alt="Logo da Adcond Adm. de Condomínios"
                 className={classes.logo}
               />
             </Button>
