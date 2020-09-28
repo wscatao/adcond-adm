@@ -45,8 +45,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Footer() {
+export default function Footer(props) {
   const classes = useStyles();
+  const { value, setValue } = props;
 
   return (
     <footer className={classes.footer}>
@@ -54,13 +55,31 @@ export default function Footer() {
         <Grid container xs={12} md={6}>
           <Grid Item className={classes.gridItem}>
             <Grid container direction="column" spacing={2}>
-              <Grid item component={Link} to="/" className={classes.links}>
+              <Grid
+                item
+                component={Link}
+                to="/"
+                onClick={() => setValue(0)}
+                className={classes.links}
+              >
                 Página Inicial
               </Grid>
-              <Grid item component={Link} to="/about" className={classes.links}>
+              <Grid
+                item
+                component={Link}
+                to="/about"
+                onClick={() => setValue(1)}
+                className={classes.links}
+              >
                 Sobre
               </Grid>
-              <Grid item component={Link} to="/local" className={classes.links}>
+              <Grid
+                item
+                component={Link}
+                to="/local"
+                onClick={() => setValue(2)}
+                className={classes.links}
+              >
                 Localização
               </Grid>
             </Grid>
@@ -74,6 +93,7 @@ export default function Footer() {
                 item
                 component={Link}
                 to="/residencial"
+                onClick={() => setValue(3)}
                 className={classes.links}
               >
                 Condomínios Residenciais
@@ -83,6 +103,7 @@ export default function Footer() {
                 component={Link}
                 to="/commercial"
                 className={classes.links}
+                onClick={() => setValue(3)}
               >
                 Condomínios Comerciais
               </Grid>
@@ -91,6 +112,7 @@ export default function Footer() {
                 component={Link}
                 to="/condominium"
                 className={classes.links}
+                onClick={() => setValue(3)}
               >
                 Acesso do Condômino
               </Grid>

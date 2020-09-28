@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -8,12 +8,14 @@ import Footer from './ui/Footer';
 import theme from './ui/Theme';
 
 function App() {
+  const [value, setValue] = useState(0);
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <Header />
+          <Header value={value} setValue={setValue} />
           <Switch>
             <Route
               exact
@@ -44,7 +46,7 @@ function App() {
             />
             <Route exact path="/price" component={() => <div>Price</div>} />
           </Switch>
-          <Footer />
+          <Footer value={value} setValue={setValue} />
         </BrowserRouter>
       </ThemeProvider>
     </div>
