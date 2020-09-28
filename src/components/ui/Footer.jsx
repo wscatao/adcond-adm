@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Footer(props) {
   const classes = useStyles();
-  const { value, setValue } = props;
+  const { setValue } = props;
 
   return (
     <footer className={classes.footer}>
@@ -157,3 +158,7 @@ export default function Footer(props) {
     </footer>
   );
 }
+
+PropTypes.Footer = {
+  setValue: PropTypes.func.isRequired,
+};

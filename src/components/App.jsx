@@ -46,7 +46,7 @@ function App() {
             />
             <Route exact path="/price" component={() => <div>Price</div>} />
           </Switch>
-          <Footer value={value} setValue={setValue} />
+          <Footer setValue={setValue} />
         </BrowserRouter>
       </ThemeProvider>
     </div>
