@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '5em',
     paddingRight: '10em',
   },
+  borda: {
+    border: '1px solid red',
+  },
 }));
 
 export default function Footer(props) {
@@ -52,105 +55,8 @@ export default function Footer(props) {
 
   return (
     <footer className={classes.footer}>
-      <Grid container justify="space-around">
-        <Grid container xs={12} md={6}>
-          <Grid Item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/"
-                onClick={() => setValue(0)}
-                className={classes.links}
-              >
-                Página Inicial
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/about"
-                onClick={() => setValue(1)}
-                className={classes.links}
-              >
-                Sobre
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/local"
-                onClick={() => setValue(2)}
-                className={classes.links}
-              >
-                Localização
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid item className={classes.links}>
-                Serviços
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/residencial"
-                onClick={() => setValue(3)}
-                className={classes.links}
-              >
-                Condomínios Residenciais
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/commercial"
-                className={classes.links}
-                onClick={() => setValue(3)}
-              >
-                Condomínios Comerciais
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/condominium"
-                className={classes.links}
-                onClick={() => setValue(3)}
-              >
-                Acesso do Condômino
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Hidden smDown>
-          <Grid
-            container
-            alignItems="flex-end"
-            md={6}
-            direction="column"
-            spacing={2}
-            className={classes.gridRight}
-          >
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.outButtonNumber}
-              >
-                <PhoneIcon className={classes.buttonIcon} />
-                (11) 5181-0774
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.outButtonEmail}
-              >
-                <MailIcon className={classes.buttonIcon} />
-                adcond@uol.com.br
-              </Button>
-            </Grid>
-          </Grid>
-        </Hidden>
+      <Grid container>
+
       </Grid>
       <Container disableGutters maxWidth="false" className={classes.footerF}>
         ADCOND Administração de Condomínios
