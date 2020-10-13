@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.texto,
     textAlign: 'center',
     color: 'white',
-    minHeight: '4em',
-    padding: '0.5em',
+    marginTop: '1em',
   },
   links: {
     color: theme.palette.common.texto,
@@ -159,7 +158,9 @@ export default function Footer(props) {
         </Grid>
       </Grid>
       <Container disableGutters maxWidth="false" className={classes.footerF}>
-        ADCOND Administração de Condomínios
+        <Grid container justify="center" alignItens="center" spacing={1}>
+          <Grid item>ADCOND Administração de Condomínios</Grid>
+        </Grid>
       </Container>
     </footer>
   );
