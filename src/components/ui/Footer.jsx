@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     textDecoration: 'none',
   },
-  gridItem: {
-    margin: '3em',
-  },
   outButtonNumber: {
     ...theme.typography.outlinedButton,
     padding: '0 5em',
@@ -40,13 +37,6 @@ const useStyles = makeStyles((theme) => ({
   buttonIcon: {
     marginRight: '0.3em',
   },
-  gridRight: {
-    paddingTop: '5em',
-    paddingRight: '10em',
-  },
-  borda: {
-    border: '1px solid red',
-  },
 }));
 
 export default function Footer(props) {
@@ -55,8 +45,118 @@ export default function Footer(props) {
 
   return (
     <footer className={classes.footer}>
-      <Grid container>
-
+      <Grid container alignItens="center">
+        <Grid item xs={12} md={6}>
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItens="center"
+            className={classes.borda}
+          >
+            <Grid item>
+              <Grid container direction="column" spacing={1}>
+                <Grid
+                  item
+                  component={Link}
+                  to="/"
+                  onClick={() => setValue(0)}
+                  className={classes.links}
+                >
+                  Página Inicial
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/about"
+                  onClick={() => setValue(1)}
+                  className={classes.links}
+                >
+                  Sobre
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/local"
+                  onClick={() => setValue(2)}
+                  className={classes.links}
+                >
+                  Localização
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container direction="column" spacing={1}>
+                <Grid item className={classes.links}>
+                  Serviços
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/residencial"
+                  onClick={() => setValue(3)}
+                  className={classes.links}
+                >
+                  Condomínios Residenciais
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/commercial"
+                  className={classes.links}
+                  onClick={() => setValue(3)}
+                >
+                  Condomínios Comerciais
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/condominium"
+                  className={classes.links}
+                  onClick={() => setValue(3)}
+                >
+                  Acesso do Condômino
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item md={6}>
+          <Grid
+            container
+            justify="center"
+            direction="row"
+            alignItens="center"
+            className={classes.borda}
+          >
+            <Grid item>
+              <Grid container direction="column" spacing={1}>
+                <Hidden smDown>
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      className={classes.outButtonNumber}
+                    >
+                      <PhoneIcon className={classes.buttonIcon} />
+                      (11) 5181-0774
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      className={classes.outButtonEmail}
+                    >
+                      <MailIcon className={classes.buttonIcon} />
+                      adcond@uol.com.br
+                    </Button>
+                  </Grid>
+                </Hidden>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
       <Container disableGutters maxWidth="false" className={classes.footerF}>
         ADCOND Administração de Condomínios
