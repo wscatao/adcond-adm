@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
@@ -15,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
   },
   footerF: {
     backgroundColor: theme.palette.common.texto,
-    textAlign: 'center',
     color: 'white',
     marginTop: '1em',
+    padding: '1em 0 0.5em 0',
   },
   links: {
     color: theme.palette.common.texto,
@@ -157,11 +156,9 @@ export default function Footer(props) {
           </Grid>
         </Grid>
       </Grid>
-      <Container disableGutters maxWidth="false" className={classes.footerF}>
-        <Grid container justify="center" alignItens="center" spacing={1}>
-          <Grid item>ADCOND Administração de Condomínios</Grid>
-        </Grid>
-      </Container>
+      <Grid className={classes.footerF} container justify="center">
+        <Grid item>ADCOND Administração de Condomínios</Grid>
+      </Grid>
     </footer>
   );
 }

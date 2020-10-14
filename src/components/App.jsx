@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './ui/Header';
 import Footer from './ui/Footer';
+import HomePage from './ui/HomePage';
 import theme from './ui/Theme';
 
 function App() {
@@ -17,11 +18,7 @@ function App() {
         <BrowserRouter>
           <Header value={value} setValue={setValue} />
           <Switch>
-            <Route
-              exact
-              path="/"
-              component={() => <div style={{ height: '2000px' }}>Home</div>}
-            />
+            <Route exact path="/" component={HomePage} />
             <Route exact path="/about" component={() => <div>About</div>} />
             <Route
               exact
